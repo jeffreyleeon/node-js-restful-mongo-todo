@@ -35,7 +35,10 @@ var updateATask = (req, res) => {
     Task.findOneAndUpdate(
         {_id: req.params.taskId},
         req.body,
-        {new: true},
+        {
+            new: true,
+            runValidators: true,
+        },
         (err, task) => {
             if (err) {
                 res.send(err);
