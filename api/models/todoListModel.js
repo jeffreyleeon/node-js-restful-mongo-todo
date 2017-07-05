@@ -1,9 +1,9 @@
 'use strict';
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-var TaskSchema = new Schema({
+const TaskSchema = new Schema({
     name: {
         type: String,
         Required: 'Kindly enter the name of the task',
@@ -17,6 +17,12 @@ var TaskSchema = new Schema({
             type: String,
             enum: ['pending', 'ongoing', 'completed'],
         }],
+        validate: {
+          validator: function(v) {
+            return ['pending', 'ongoing', 'completed'].indexOf(v) !== -1;
+          },
+          message: '{VALUE} is not a valid status!'
+        },
         default: ['pending'],
     },
 });
